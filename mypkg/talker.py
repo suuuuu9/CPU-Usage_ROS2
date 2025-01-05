@@ -1,20 +1,23 @@
 import rclpy
+import psutil
 from rclpy.node import Node
-from person_msgs.srv import Query
-
-rclpy.init()
-node = Node("talker")
+from std_msgs.msg import Float32
 
 
-def cb(request, response):
-    if request.name == "木内涼葉":
-        response.age = 20
-    else:
-        response.age = 255
+class Talker(Node):
+    def __init__(self):
+        super().__init__("talker")
+        self.pub = self.create_publisher(Float32, "cpu_usage", 10)
+        self.create_timer(0.5, self.cb)
 
-    return response
+
+    def cb(self):
+        msg = ()
+        msg.data = psutil.cpu_percent(interval=1)
+        self.pub.publish(msg)
 
 
 def main():
-    srv = node.create_service(Query, "query", cb)
+    rclpy.init()
+    node = Talker()
     rclpy.spin(node)

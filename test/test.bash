@@ -6,7 +6,6 @@ dir=~
 cd $dir/ros2_ws
 colcon build
 source $dir/.bashrc
-timeout 10 ros2 launch mypkg talk_listen.launch.py | tee -i /tmp/mypkg.log
+timeout 10 ros2 launch cpu_usage_ros2 talk_listen.launch.py | tee -i /tmp/cpu_usage_ros2.log
 
-cat /tmp/mypkg.log |
-grep 'Listen: 10'
+cat /tmp/cpu_usage_ros2.log |

@@ -7,11 +7,11 @@ import launch_ros.actions
 def generate_launch_description():
 
     talker = launch_ros.actions.Node(
-        package='mypkg',
+        package='cpu_usage_ros2',
         executable='talker',
         )
     listener = launch_ros.actions.Node(
-        package='mypkg',
+        package='cpu_usage_ros2',
         executable='listener',
         output='screen'
         )
